@@ -1,3 +1,9 @@
+// Author: Katie Bailey.
+// Date: 01/19/2026
+// Class: CSC 422 100
+// Project: Assignment 1
+// File Name: Main.java
+// Description: This file contains the code for assignment 1.
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -170,3 +176,4 @@ public class Main {
         System.out.println(petID.size() + " rows in set.\n");
     }
 }
+
