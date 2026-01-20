@@ -49,7 +49,7 @@ public class Main {
                         System.out.println("Invalid age. Enter a number.\n");
                     }
                 }
-                System.out.println(pets.size() + " pets added.\n");
+                System.out.println("Pets added.\n");
             } 
 
             // Section of code that updates an existing pet in the database.
@@ -59,11 +59,11 @@ public class Main {
                 try {
                     int id = Integer.parseInt(userInput.nextLine().trim());
                     if (id >= 0 && id < pets.size()) {
-                        Pet p = pets.get(id);
+                        Pet updatedPet = pets.get(id);
                         System.out.print("Enter new name: ");
-                        p.name = userInput.nextLine().trim();
+                        updatedPet.name = userInput.nextLine().trim();
                         System.out.print("Enter new age: ");
-                        p.age = Integer.parseInt(userInput.nextLine().trim());
+                        updatedPet.age = Integer.parseInt(userInput.nextLine().trim());
                         System.out.println("Pet updated.\n");
                     } else {
                         System.out.println("Invalid ID.");
@@ -94,22 +94,28 @@ public class Main {
             else if (userChoice.equals("5")) {
                 System.out.print("Enter name to search: ");
                 String nameSearch = userInput.nextLine().trim().toLowerCase();
-                ArrayList<Pet> results = new ArrayList<>();
-                for (Pet p : pets) {
-                    if (p.name.toLowerCase().equals(nameSearch)) results.add(p);
+                ArrayList<Integer> petID = new ArrayList<>();
+                for (int i = 0; i < pets.size(); i++) {
+                    if (pets.get(i).name.toLowerCase().equals(nameSearch)) {
+                        petID.add(i);
+                    }
                 }
-                printPets(results);
+
+                printPetsWithIds(pets, petID);
             } 
 
             // Section of code that searches pets by age.
             else if (userChoice.equals("6")) {
                 System.out.print("Enter age to search: ");
                 int ageSearch = Integer.parseInt(userInput.nextLine().trim());
-                ArrayList<Pet> results = new ArrayList<>();
-                for (Pet p : pets) {
-                    if (p.age == ageSearch) results.add(p);
-                }
-                printPets(results);
+                ArrayList<Integer> petID = new ArrayList<>();
+                    for (int i = 0; i < pets.size(); i++) {
+                        if (pets.get(i).age == ageSearch) {
+                            petID.add(i);
+                        }
+                    }
+
+                    printPetsWithIds(pets, petID);
             } 
             // Section of code that exits the program.
             else if (userChoice.equals("7")) {
@@ -124,16 +130,43 @@ public class Main {
         userInput.close();
     }
 
-    // ---------------- Helper function ----------------
-    public static void printPets(ArrayList<Pet> list) {
+    // Helper function to print the list of pets in a formatted table.
+    public static void printPets(ArrayList<Pet> petList) {
         System.out.println("+----------------------+");
         System.out.printf("| %-3s | %-7s | %-4s |\n", "ID", "NAME", "AGE");
         System.out.println("+----------------------+");
-        for (int i = 0; i < list.size(); i++) {
-            Pet p = list.get(i);
-            System.out.printf("| %-3d | %-7s | %-4d |\n", i, p.name, p.age);
+
+        for (int index = 0; index < petList.size(); index++) {
+            Pet currentPet = petList.get(index);
+            System.out.printf(
+                "| %-3d | %-7s | %-4d |\n",
+                index,
+                currentPet.name,
+                currentPet.age
+            );
         }
+
         System.out.println("+----------------------+");
-        System.out.println(list.size() + " rows in set.\n");
+        System.out.println(petList.size() + " rows in set.\n");
+    }
+
+    // Helper function to print pets with their IDs from a list of petIDs.
+    public static void printPetsWithIds(ArrayList<Pet> pets, ArrayList<Integer> petID) {
+        System.out.println("+----------------------+");
+        System.out.printf("| %-3s | %-7s | %-4s |\n", "ID", "NAME", "AGE");
+        System.out.println("+----------------------+");
+
+        for (int petIndex : petID) {
+            Pet matchedPet = pets.get(petIndex);
+            System.out.printf(
+                "| %-3d | %-7s | %-4d |\n",
+                petIndex,
+                matchedPet.name,
+                matchedPet.age
+            );
+        }
+
+        System.out.println("+----------------------+");
+        System.out.println(petID.size() + " rows in set.\n");
     }
 }
