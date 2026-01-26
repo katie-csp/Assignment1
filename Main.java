@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in); 
-        ArrayList<Pet> pets = new ArrayList<>();
+        ArrayList<Pet> pets = FileHandler.loadPets();
 
         System.out.println("\nPet Database Program.\n");
 
@@ -125,7 +125,8 @@ public class Main {
             } 
             // Section of code that exits the program.
             else if (userChoice.equals("7")) {
-                System.out.println("Exiting program.\n");
+                FileHandler.savePets(pets);
+                System.out.println("Pet data 
                 break;
             } 
             else {
@@ -176,4 +177,5 @@ public class Main {
         System.out.println(petID.size() + " rows in set.\n");
     }
 }
+
 
