@@ -1,9 +1,10 @@
 // Author: Katie Bailey.
 // Date: 01/19/2026
 // Class: CSC 422 100
-// Project: Assignment 1
+// Project: Assignment 2
 // File Name: Main.java
-// Description: This file contains the code for assignment 1.
+// Description: This file contains the main code for assignment 2. Handles user interaction
+// and calls FileHandler to load and save pet data.
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,7 +103,7 @@ public class Main {
             // Section of code that removes an existing pet from the database.
             else if (userChoice.equals("4")) {
                 FileHandler.savePets(pets);
-                System.out.println("Pet data saved. Exiting program.\n");
+                System.out.println("Goodbye!\n");
                 break;
             }
 
@@ -117,13 +118,13 @@ public class Main {
     // Helper function to print the list of pets in a formatted table.
     public static void printPets(ArrayList<Pet> petList) {
         System.out.println("+----------------------+");
-        System.out.printf("| %-3s | %-7s | %-4s |\n", "ID", "NAME", "AGE");
+        System.out.printf("| %3s | %-7s | %4s |\n", "ID", "NAME", "AGE");
         System.out.println("+----------------------+");
 
         for (int index = 0; index < petList.size(); index++) {
             Pet currentPet = petList.get(index);
             System.out.printf(
-                "| %-3d | %-7s | %-4d |\n",
+                "| %3d | %-7s | %4d |\n",
                 index,
                 currentPet.name,
                 currentPet.age
@@ -134,6 +135,7 @@ public class Main {
         System.out.println(petList.size() + " rows in set.\n");
     }
 }
+
 
 
 
