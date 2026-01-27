@@ -46,7 +46,6 @@ public class FileHandler {
         } catch (Exception e) {
             System.out.println("Error: Unable to load pet data from file.");
         }
-
         return loadedPets;
     }
 
